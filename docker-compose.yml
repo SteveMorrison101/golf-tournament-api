@@ -1,0 +1,17 @@
+services:
+  mysql:
+    image: mysql:8
+    container_name: golfclub-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: golfclub
+      MYSQL_DATABASE: golfclubdb
+      MYSQL_USER: golfclub
+      MYSQL_PASSWORD: golfclub
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+

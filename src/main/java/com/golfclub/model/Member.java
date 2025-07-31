@@ -1,9 +1,9 @@
 package com.golfclub.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Member {
@@ -15,10 +15,11 @@ public class Member {
     private String memberAddress;
     private String memberEmailAddress;
     private String memberPhoneNumber;
-    private LocalDate startDateOfMembership;
+    private String startDateOfMembership;
     private int durationOfMembership;
 
     @ManyToMany(mappedBy = "members")
+    @JsonIgnore // <-- This breaks the infinite loop!
     private Set<Tournament> tournaments = new HashSet<>();
 
     // Constructors
@@ -34,12 +35,15 @@ public class Member {
     public void setMemberEmailAddress(String memberEmailAddress) { this.memberEmailAddress = memberEmailAddress; }
     public String getMemberPhoneNumber() { return memberPhoneNumber; }
     public void setMemberPhoneNumber(String memberPhoneNumber) { this.memberPhoneNumber = memberPhoneNumber; }
-    public LocalDate getStartDateOfMembership() { return startDateOfMembership; }
-    public void setStartDateOfMembership(LocalDate startDateOfMembership) { this.startDateOfMembership = startDateOfMembership; }
+    public String getStartDateOfMembership() { return startDateOfMembership; }
+    public void setStartDateOfMembership(String startDateOfMembership) { this.startDateOfMembership = startDateOfMembership; }
     public int getDurationOfMembership() { return durationOfMembership; }
     public void setDurationOfMembership(int durationOfMembership) { this.durationOfMembership = durationOfMembership; }
 
     public Set<Tournament> getTournaments() { return tournaments; }
     public void setTournaments(Set<Tournament> tournaments) { this.tournaments = tournaments; }
 }
+
+
+
 
