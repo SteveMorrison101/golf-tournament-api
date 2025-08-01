@@ -17,9 +17,10 @@ public class Member {
     private String memberPhoneNumber;
     private String startDateOfMembership;
     private int durationOfMembership;
+    private String membershipType; // <-- NEW FIELD
 
     @ManyToMany(mappedBy = "members")
-    @JsonIgnore // <-- This breaks the infinite loop!
+    @JsonIgnore  // Prevent infinite recursion
     private Set<Tournament> tournaments = new HashSet<>();
 
     // Constructors
@@ -39,10 +40,13 @@ public class Member {
     public void setStartDateOfMembership(String startDateOfMembership) { this.startDateOfMembership = startDateOfMembership; }
     public int getDurationOfMembership() { return durationOfMembership; }
     public void setDurationOfMembership(int durationOfMembership) { this.durationOfMembership = durationOfMembership; }
-
+    public String getMembershipType() { return membershipType; }
+    public void setMembershipType(String membershipType) { this.membershipType = membershipType; }
     public Set<Tournament> getTournaments() { return tournaments; }
     public void setTournaments(Set<Tournament> tournaments) { this.tournaments = tournaments; }
 }
+
+
 
 
 

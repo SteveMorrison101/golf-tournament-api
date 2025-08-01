@@ -33,6 +33,27 @@ public class MemberService {
         memberRepository.deleteById(id);
     }
 
-    // Will dd more methods for searching later
+    public List<Member> searchByName(String name) {
+        return memberRepository.findByMemberNameContainingIgnoreCase(name);
+    }
+
+    public List<Member> searchByPhone(String phone) {
+        return memberRepository.findByMemberPhoneNumber(phone);
+    }
+
+    public List<Member> searchByDuration(int duration) {
+        return memberRepository.findByDurationOfMembership(duration);
+    }
+
+    public List<Member> searchByTournamentStartDate(String startDate) {
+        return memberRepository.findByTournaments_StartDate(startDate);
+    }
+
+    // search by membershipType
+    public List<Member> searchByMembershipType(String membershipType) {
+        return memberRepository.findByMembershipTypeContainingIgnoreCase(membershipType);
+    }
 }
+
+
 

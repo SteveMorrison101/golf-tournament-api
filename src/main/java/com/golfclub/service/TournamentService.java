@@ -33,6 +33,15 @@ public class TournamentService {
         tournamentRepository.deleteById(id);
     }
 
-    // Will add methods for searching and member registration later
+    // Search methods
+    public List<Tournament> searchByStartDate(String startDate) {
+        return tournamentRepository.findByStartDate(startDate);
+    }
+
+    public List<Tournament> searchByLocation(String location) {
+        return tournamentRepository.findByLocationContainingIgnoreCase(location);
+    }
 }
+
+
 

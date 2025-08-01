@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   mysql:
     image: mysql:8
@@ -11,7 +13,27 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+    networks:
+      - golfnet
+
+  api:
+    image: golfclub-api:latest
+    build:
+      context: .
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/golfclubdb
+      SPRING_DATASOURCE_USERNAME: golfclub
+      SPRING_DATASOURCE_PASSWORD: golfclub
+    ports:
+      - "8080:8080"
+    networks:
+      - golfnet
 
 volumes:
   db_data:
+
+networks:
+  golfnet:
 

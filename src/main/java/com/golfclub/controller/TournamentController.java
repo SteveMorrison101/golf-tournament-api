@@ -67,7 +67,23 @@ public class TournamentController {
     public String debug(@RequestBody String body) {
         return "Raw: " + body;
     }
+
+    // Search endpoints
+
+    //search startDate or location
+    @GetMapping("/search")
+    public List<Tournament> searchTournaments(@RequestParam(required = false) String startDate,
+                                              @RequestParam(required = false) String location) {
+        if (startDate != null) {
+            return tournamentService.searchByStartDate(startDate);
+        }
+        if (location != null) {
+            return tournamentService.searchByLocation(location);
+        }
+        return tournamentService.getAllTournaments();
+    }
 }
+
 
 
 
